@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv3op27pripxu"]
+
+[ext_resource type="PackedScene" uid="uid://dir6ndwqlgp8y" path="res://node_2d.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://khgf0x8hjyt8" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dqpn3lbuwm6b6" path="res://enemy.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://e71pfkn7wxlk" path="res://coin.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://diy3jbyava83y" path="res://canvas_layer.tscn" id="5_lquwl"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_h2yge")
+
+[node name="Area2D" parent="." instance=ExtResource("1_0xm2m")]
+
+[node name="Node2D" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(180, 2)
+speed = 1000
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="Area2D2" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(296, 5)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("5_lquwl")]
+process_mode = 3
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 0.125
+one_shot = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 0.125
+one_shot = true
+
+[connection signal="lose" from="Area2D" to="." method="_on_area_2d_lose"]
+[connection signal="win" from="Area2D" to="." method="_on_area_2d_win"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
