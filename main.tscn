@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv3op27pripxu"]
+[gd_scene load_steps=11 format=3 uid="uid://cv3op27pripxu"]
 
 [ext_resource type="PackedScene" uid="uid://dir6ndwqlgp8y" path="res://node_2d.tscn" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://khgf0x8hjyt8" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dqpn3lbuwm6b6" path="res://enemy.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://e71pfkn7wxlk" path="res://coin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://diy3jbyava83y" path="res://canvas_layer.tscn" id="5_lquwl"]
+[ext_resource type="AudioStream" uid="uid://fmu6h0f7aeh5" path="res://UI_ButtonPress5_FOL_Deal.wav" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://bfb7w5ck7vpo1" path="res://Oof 3_M_VO_Calvert.wav" id="7_272bh"]
+[ext_resource type="AudioStream" uid="uid://cq7b43xehouo5" path="res://Menu_Navigation2_FOL_Deal.mp3" id="8_4c57u"]
+[ext_resource type="AudioStream" uid="uid://dpi4o2pvhahnp" path="res://Positive_Result_1_SF_Hunt.wav" id="9_4c57u"]
+[ext_resource type="AudioStream" uid="uid://b4ahb6l7lwli8" path="res://Negative_Result_1_SF_Hunt.wav" id="10_efxa6"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_h2yge")
@@ -33,6 +38,31 @@ one_shot = true
 wait_time = 0.125
 one_shot = true
 
+[node name="shoot" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("6_7mycd")
+volume_db = -30.919
+pitch_scale = 0.25
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_272bh")
+
+[node name="coin" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("8_4c57u")
+volume_db = 3.748
+
+[node name="win" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("9_4c57u")
+
+[node name="lose" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("10_efxa6")
+
+[connection signal="coin" from="Area2D" to="." method="_on_area_2d_coin"]
+[connection signal="hit" from="Area2D" to="." method="_on_area_2d_hit"]
 [connection signal="lose" from="Area2D" to="." method="_on_area_2d_lose"]
 [connection signal="win" from="Area2D" to="." method="_on_area_2d_win"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

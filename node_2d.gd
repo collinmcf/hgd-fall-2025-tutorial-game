@@ -1,5 +1,7 @@
 extends Area2D
 
+signal hit
+signal coin
 signal lose
 signal win
 
@@ -37,6 +39,7 @@ func _on_area_entered(_area):
 	if _area.name.begins_with("@Area2D"):
 		health -= 1
 		print(health)
+		hit.emit()
 		
 		if health < 1:
 			hide()
@@ -46,6 +49,7 @@ func _on_area_entered(_area):
 	if _area.name == "Area2D2":
 		coins += 1
 		print("You have ", coins, " coins")
+		coin.emit()
 		
 		if coins >= 10:
 			win.emit()

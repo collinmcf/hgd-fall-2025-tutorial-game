@@ -19,6 +19,7 @@ func _on_timer_timeout() -> void:
 	var new_proj = projectile.instantiate()
 	new_proj.position = enemy.position
 	add_child(new_proj)
+	$shoot.play()
 
 func _on_area_2d_lose() -> void:
 	$Timer2.start()
@@ -33,13 +34,21 @@ func _on_area_2d_win() -> void:
 	$Timer3.start()
 
 func _on_timer_2_timeout() -> void:
+	$lose.play()
 	hud._show_win_or_lose(false)
 	get_tree().paused = true
 
 func _on_timer_3_timeout() -> void:
+	$win.play()
 	for child in self.get_children():
 		if child.name.begins_with("@Area2D"):
 			child.queue_free()
 	
 	hud._show_win_or_lose(true)
 	get_tree().paused = true
+
+func _on_area_2d_hit() -> void:
+	$hit.play() # LOL
+
+func _on_area_2d_coin() -> void:
+	$coin.play()
